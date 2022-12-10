@@ -31,7 +31,9 @@ function App() {
       decryptFromHex(k, iv, text).then((plainText) => {
         setConvertedValue(plainText);
         setError(null);
-      }).catch(setError)
+      }).catch(error => {
+        setError(error);
+      })
     }
   };
 

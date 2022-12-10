@@ -45,7 +45,7 @@ export const ConversionForm: FC<ConversionFormProps> = ({
     <div className="form-body" id={id}>
       <fieldset>
         <legend>{legend}</legend>
-        <TextInputField ref={kRef} label="k" id="key" defaultValue={K_STRING}/>
+        <TextInputField ref={kRef} label="k" id="key" defaultValue={K_STRING.slice(0, 16)} />
         <TextInputField ref={ivRef} label="iv (hex)" id="iv" defaultValue={IV_STRING} />
         <TextAreaField ref={textRef} id="plaintext" label="plain text" />
         <div className="form-row">

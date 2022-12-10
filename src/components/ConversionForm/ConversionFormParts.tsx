@@ -1,10 +1,5 @@
 import { ComponentPropsWithoutRef, forwardRef } from "react";
 
-// interface CommonProps {
-//   id: string;
-//   label: string;
-//   defaultValue?:
-// }
 interface InputProps extends ComponentPropsWithoutRef<'input'> {
   label: string;
 }
