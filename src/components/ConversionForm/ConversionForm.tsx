@@ -1,17 +1,27 @@
 import { FC, useRef } from "react";
 import { TextInputField, TextAreaField } from "./ConversionFormParts";
 
+const IV_STRING = '63b0329eda143b6c0941689b2e6dd741';
+const K_STRING = 'wMwM4ytpeIfw2KSueDiXnH3dbiaS0XBv3dTeh0RfvbY';
+
 interface ConversionFormProps {
   id: string;
   legend: string;
   actionLabel: string;
-  onSubmit?: (payload: ConversionPayload) => void;
+  onSubmit?: (payload: Partial<ConversionPayload>) => void;
 }
 
 export interface ConversionPayload {
-  k: string | undefined;
-  iv: string | undefined;
-  text: string | undefined;
+  k: string;
+  iv: string;
+  text: string;
+}
+
+export const isConversionPayload = (obj: Partial<ConversionPayload>): obj is ConversionPayload => {
+  const keys: Array<keyof ConversionPayload> = [
+    'k', 'iv', 'text'
+  ];
+  return keys.every((key) => !!obj[key])
 }
 
 export const ConversionForm: FC<ConversionFormProps> = ({
@@ -35,8 +45,8 @@ export const ConversionForm: FC<ConversionFormProps> = ({
     <div className="form-body" id={id}>
       <fieldset>
         <legend>{legend}</legend>
-        <TextInputField ref={kRef} label="k" id="key" />
-        <TextInputField ref={ivRef} label="iv (hex)" id="iv" />
+        <TextInputField ref={kRef} label="k" id="key" defaultValue={K_STRING}/>
+        <TextInputField ref={ivRef} label="iv (hex)" id="iv" defaultValue={IV_STRING} />
         <TextAreaField ref={textRef} id="plaintext" label="plain text" />
         <div className="form-row">
           <button onClick={handleOnSubmit}>{actionLabel}</button>

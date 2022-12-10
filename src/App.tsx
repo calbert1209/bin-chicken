@@ -4,8 +4,10 @@ import "./App.css";
 import {
   ConversionForm,
   ConversionPayload,
+  isConversionPayload,
 } from "./components/ConversionForm/ConversionForm";
 import { ConversionOutputDisplay } from "./components/ConversionOutputDisplay/ConversionOutputDisplay";
+import { decryptFromHex, encrypt2hex } from "./service/AES-GCM";
 
 function App() {
   const [convertedValue, setConvertedValue] = useState(
@@ -13,13 +15,24 @@ function App() {
   );
   const [error, setError] = useState<Error | null>(null);
 
-  const handleOnSubmitEncrypt = (args: ConversionPayload) => {
-    setConvertedValue(JSON.stringify(args));
-    setError(null);
+  const handleOnSubmitEncrypt = (payload: Partial<ConversionPayload>) => {
+    if (isConversionPayload(payload)) {
+      const { k, iv, text } = payload;
+      encrypt2hex(k, iv, text).then((cypherText) => {
+        setConvertedValue(cypherText);
+        setError(null);
+      }).catch(setError)
+    }
   };
 
-  const handleOnSubmitDecrypt = () => {
-    setError(new Error("FAKE: something went wrong"));
+  const handleOnSubmitDecrypt = (payload: Partial<ConversionPayload>) => {
+    if (isConversionPayload(payload)) {
+      const { k, iv, text } = payload;
+      decryptFromHex(k, iv, text).then((plainText) => {
+        setConvertedValue(plainText);
+        setError(null);
+      }).catch(setError)
+    }
   };
 
   return (
