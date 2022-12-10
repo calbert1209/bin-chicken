@@ -1,41 +1,77 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+#encrypt legend,
+#encrypt label {
+  font-weight: bold;
+  color: seagreen;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+#encrypt button,
+#decrypt button {
+  color: white;
+  border: 0;
+  border-radius: 4px;
+  padding: 8px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#encrypt button {
+  background-color: seagreen;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+#decrypt button {
+  background-color: tomato;
 }
 
-.card {
-  padding: 2em;
+#decrypt legend,
+#decrypt label {
+  font-weight: bold;
+  color: tomato;
 }
 
-.read-the-docs {
-  color: #888;
+fieldset {
+  border: 1px solid rgb(200, 200, 200);
+  border-radius: 4px;
+}
+
+input,
+textarea {
+  border: 1px solid rgb(200, 200, 200);
+  border-radius: 4px;
+  padding: 4px 8px;
+  color: rgb(50, 50, 50);
+  font-size: calc(12 / 16 * 1rem);
+  font-family: "Monoid Tight", monospace;
+}
+
+.columns {
+  display: flex;
+  gap: 16px;
+}
+
+.form-body {
+  width: 30vw;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 8px;
+}
+
+#output {
+  margin-top: 12px;
+  padding: 8px;
+  border: 1px solid rgb(200, 200, 200);
+  border-radius: 4px;
+  background-color: rgb(240, 240, 240);
+  color: rgb(50, 50, 50);
+  font-family: "Monoid Tight", monospace;
+  font-size: calc(12 / 16 * 1rem);
+  width: 30vw;
+  min-height: 40vh;
+  overflow-wrap: anywhere;
+}
+
+#output[data-status="error"] {
+  background-color: rgb(255, 230, 230);
+  color: rgb(200, 0, 0);
+  border: 1px solid rgb(220, 180, 180);
 }
