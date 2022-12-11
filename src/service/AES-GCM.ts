@@ -25,78 +25,80 @@ function uint8Array2hexString(u8: Uint8Array) {
 /*****************************************
  * Key Creation
  */
-const EXPORT_FMT = 'jwk';
 const AES_GCM = 'AES-GCM';
+const PBKDF2 = 'PBKDF2';
+const SHA_256 = 'SHA-256';
 const READ_WRITE_USAGE: ReadonlyArray<KeyUsage> = ['encrypt', 'decrypt'];
+const DERIVE_USAGE: ReadonlyArray<KeyUsage> = ['deriveKey', 'deriveBits'];
 
-function createJwkKey(k: string): JsonWebKey {
+const SALT = new Uint8Array(
+  [140, 228, 171, 171, 157, 177, 126, 48, 206, 61, 152, 162, 189, 176, 174, 116]
+);
+
+const PBKDF2_PARAMS: Pbkdf2Params = {
+  name: PBKDF2,
+  hash: SHA_256,
+  salt: SALT,
+  iterations: 10,
+};
+
+function createAesGcmOptions(ivHex: string) {
   return {
-    alg: "A256GCM",
-    ext: true,
-    k,
-    kty: "oct"
+    name: AES_GCM,
+    iv: hexString2Uint8Array(ivHex),
   };
 }
 
-const AES_GCM_ALGO: AesKeyAlgorithm = { name: AES_GCM, length: 128 };
-
-
-function importJwkKey(keyData: JsonWebKey) {
+/*
+ * Get some key material to use as input to the deriveKey method.
+ * The key material is a password supplied by the user.
+ * FROM: https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/deriveKey
+*/
+function getKeyMaterial(password: string) {
+  const enc = new TextEncoder();
   return window.crypto.subtle.importKey(
-    EXPORT_FMT,
-    keyData,
-    AES_GCM_ALGO,
+    "raw",
+    enc.encode(password),
+    PBKDF2,
+    false,
+    DERIVE_USAGE,
+  );
+}
+
+function deriveKey(keyMaterial: CryptoKey) {
+  return window.crypto.subtle.deriveKey(
+    PBKDF2_PARAMS,
+    keyMaterial,
+    { name: AES_GCM, length: 256},
     true,
     READ_WRITE_USAGE,
   );
 }
 
-const string2Uint8Array = (text: string) => {
-  const charCodes = text.split('').map(c => c.charCodeAt(0));
-  return Uint8Array.from(charCodes);
-}
+export async function encrypt2hex(password: string, ivHex: string, plaintext: string, ) {
+  const keyMaterial = await getKeyMaterial(password);
+  const key = await deriveKey(keyMaterial);
 
-function importRawKey(key: string) {
-  if (key.length !== 16) {
-    throw new Error('invalid arg, key must be 16 characters long');
-  }
-
-  const rawKey = string2Uint8Array(key);
-  return window.crypto.subtle.importKey(
-    "raw",
-    rawKey,
-    AES_GCM,
-    true,
-    READ_WRITE_USAGE
+  const enc = new TextEncoder();
+  const cypherBuffer = await window.crypto.subtle.encrypt(
+    createAesGcmOptions(ivHex),
+    key,
+    enc.encode(plaintext),
   );
+
+  return uint8Array2hexString(new Uint8Array(cypherBuffer));
 }
 
-/***/
-function createAESGCMOptions(ivHex: string) {
-  return {
-  name: 'AES-GCM',
-  iv: hexString2Uint8Array(ivHex),
-}
-}
-
-export async function encrypt2hex(k:string, ivHex: string, plainText: string) {
-  const algoOptions = createAESGCMOptions(ivHex);
-  const key = await importRawKey(k);
-  const encodedText = new TextEncoder().encode(plainText);
-
-  const buffer = await window.crypto.subtle.encrypt(algoOptions, key, encodedText);
-  return uint8Array2hexString(new Uint8Array(buffer));
-}
-
-export async function decryptFromHex(k: string, ivHex: string, hexCypherText: string) {
-  const algoOptions = createAESGCMOptions(ivHex);
-  const key = await importRawKey(k);
+export async function decryptFromHex(password: string, ivHex: string, hexCypherText: string) {
+  const keyMaterial = await getKeyMaterial(password);
+  const key = await deriveKey(keyMaterial);
   const cypherText = hexString2Uint8Array(hexCypherText);
-  
-  const decrypted = await window.crypto.subtle.decrypt(algoOptions, key, cypherText);
+
+  const decrypted = await window.crypto.subtle.decrypt(
+    createAesGcmOptions(ivHex),
+    key,
+    cypherText,
+  );
+
   return new TextDecoder().decode(decrypted);
 }
-
-// NOTES
-// Import raw key (16 byte random array)
-// https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#raw_import

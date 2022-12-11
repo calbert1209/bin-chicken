@@ -21,7 +21,9 @@ function App() {
       encrypt2hex(k, iv, text).then((cypherText) => {
         setConvertedValue(cypherText);
         setError(null);
-      }).catch(setError)
+      }).catch((error) => {
+        setError(error);
+      })
     }
   };
 
