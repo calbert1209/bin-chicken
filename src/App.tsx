@@ -18,24 +18,28 @@ function App() {
   const handleOnSubmitEncrypt = (payload: Partial<ConversionPayload>) => {
     if (isConversionPayload(payload)) {
       const { k, iv, text } = payload;
-      encrypt2hex(k, iv, text).then((cypherText) => {
-        setConvertedValue(cypherText);
-        setError(null);
-      }).catch((error) => {
-        setError(error);
-      })
+      encrypt2hex(k, iv, text)
+        .then((cypherText) => {
+          setConvertedValue(cypherText);
+          setError(null);
+        })
+        .catch((error) => {
+          setError(error);
+        });
     }
   };
 
   const handleOnSubmitDecrypt = (payload: Partial<ConversionPayload>) => {
     if (isConversionPayload(payload)) {
       const { k, iv, text } = payload;
-      decryptFromHex(k, iv, text).then((plainText) => {
-        setConvertedValue(plainText);
-        setError(null);
-      }).catch(error => {
-        setError(error);
-      })
+      decryptFromHex(k, iv, text)
+        .then((plainText) => {
+          setConvertedValue(plainText);
+          setError(null);
+        })
+        .catch((error) => {
+          setError(error);
+        });
     }
   };
 

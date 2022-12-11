@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef, forwardRef } from "react";
 
-interface InputProps extends ComponentPropsWithoutRef<'input'> {
+interface InputProps extends ComponentPropsWithoutRef<"input"> {
   label: string;
 }
 
@@ -9,13 +9,19 @@ export const TextInputField = forwardRef<HTMLInputElement, InputProps>(
     return (
       <div className="form-row">
         <label htmlFor={id}>{label}</label>
-        <input ref={ref} type="text" name={id} id={id} defaultValue={defaultValue} />
+        <input
+          ref={ref}
+          type="text"
+          name={id}
+          id={id}
+          defaultValue={defaultValue}
+        />
       </div>
     );
   }
 );
 
-interface TextAreaProps extends ComponentPropsWithoutRef<'textarea'> {
+interface TextAreaProps extends ComponentPropsWithoutRef<"textarea"> {
   label: string;
 }
 
@@ -24,7 +30,13 @@ export const TextAreaField = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     return (
       <div className="form-row">
         <label htmlFor={id}>{label}</label>
-        <textarea ref={ref} itemType="textarea" name={id} id={id} defaultValue={defaultValue} />
+        <textarea
+          ref={ref}
+          itemType="textarea"
+          name={id}
+          id={id}
+          defaultValue={defaultValue}
+        />
       </div>
     );
   }

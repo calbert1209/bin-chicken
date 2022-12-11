@@ -1,8 +1,8 @@
 import { FC, useRef } from "react";
 import { TextInputField, TextAreaField } from "./ConversionFormParts";
 
-const IV_STRING = '63b0329eda143b6c0941689b2e6dd741';
-const K_STRING = 'wMwM4ytpeIfw2KSueDiXnH3dbiaS0XBv3dTeh0RfvbY';
+const IV_STRING = "63b0329eda143b6c0941689b2e6dd741";
+const K_STRING = "wMwM4ytpeIfw2KSueDiXnH3dbiaS0XBv3dTeh0RfvbY";
 
 interface ConversionFormProps {
   id: string;
@@ -17,12 +17,12 @@ export interface ConversionPayload {
   text: string;
 }
 
-export const isConversionPayload = (obj: Partial<ConversionPayload>): obj is ConversionPayload => {
-  const keys: Array<keyof ConversionPayload> = [
-    'k', 'iv', 'text'
-  ];
-  return keys.every((key) => !!obj[key])
-}
+export const isConversionPayload = (
+  obj: Partial<ConversionPayload>
+): obj is ConversionPayload => {
+  const keys: Array<keyof ConversionPayload> = ["k", "iv", "text"];
+  return keys.every((key) => !!obj[key]);
+};
 
 export const ConversionForm: FC<ConversionFormProps> = ({
   id,
@@ -46,7 +46,12 @@ export const ConversionForm: FC<ConversionFormProps> = ({
       <fieldset>
         <legend>{legend}</legend>
         <TextInputField ref={kRef} label="k" id="key" defaultValue={K_STRING} />
-        <TextInputField ref={ivRef} label="iv (hex)" id="iv" defaultValue={IV_STRING} />
+        <TextInputField
+          ref={ivRef}
+          label="iv (hex)"
+          id="iv"
+          defaultValue={IV_STRING}
+        />
         <TextAreaField ref={textRef} id="plaintext" label="plain text" />
         <div className="form-row">
           <button onClick={handleOnSubmit}>{actionLabel}</button>
