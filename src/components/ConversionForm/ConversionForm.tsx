@@ -12,7 +12,7 @@ interface ConversionFormProps {
 }
 
 export interface ConversionPayload {
-  k: string;
+  password: string;
   iv: string;
   text: string;
 }
@@ -20,7 +20,7 @@ export interface ConversionPayload {
 export const isConversionPayload = (
   obj: Partial<ConversionPayload>
 ): obj is ConversionPayload => {
-  const keys: Array<keyof ConversionPayload> = ["k", "iv", "text"];
+  const keys: Array<keyof ConversionPayload> = ["password", "iv", "text"];
   return keys.every((key) => !!obj[key]);
 };
 
@@ -30,13 +30,13 @@ export const ConversionForm: FC<ConversionFormProps> = ({
   actionLabel,
   onSubmit,
 }) => {
-  const kRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
   const ivRef = useRef<HTMLInputElement>(null);
   const textRef = useRef<HTMLTextAreaElement>(null);
 
   const handleOnSubmit = () =>
     onSubmit?.({
-      k: kRef.current?.value,
+      password: passwordRef.current?.value,
       iv: ivRef.current?.value,
       text: textRef.current?.value,
     });
@@ -45,7 +45,12 @@ export const ConversionForm: FC<ConversionFormProps> = ({
     <div className="form-body" id={id}>
       <fieldset>
         <legend>{legend}</legend>
-        <TextInputField ref={kRef} label="k" id="key" defaultValue={K_STRING} />
+        <TextInputField
+          ref={passwordRef}
+          label="password"
+          id="password"
+          defaultValue={K_STRING}
+        />
         <TextInputField
           ref={ivRef}
           label="iv (hex)"
