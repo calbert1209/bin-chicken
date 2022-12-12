@@ -17,8 +17,8 @@ function App() {
 
   const handleOnSubmitEncrypt = (payload: Partial<ConversionPayload>) => {
     if (isConversionPayload(payload)) {
-      const { k, iv, text } = payload;
-      encrypt2hex(k, iv, text)
+      const { password, iv, text } = payload;
+      encrypt2hex(password, iv, text)
         .then((cypherText) => {
           setConvertedValue(cypherText);
           setError(null);
@@ -31,8 +31,8 @@ function App() {
 
   const handleOnSubmitDecrypt = (payload: Partial<ConversionPayload>) => {
     if (isConversionPayload(payload)) {
-      const { k, iv, text } = payload;
-      decryptFromHex(k, iv, text)
+      const { password, iv, text } = payload;
+      decryptFromHex(password, iv, text)
         .then((plainText) => {
           setConvertedValue(plainText);
           setError(null);
