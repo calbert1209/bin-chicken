@@ -11,7 +11,7 @@ export default defineConfig(({ command, mode }) => {
   } else {
     return {
       ...baseConfig,
-      base: "/bin-chicken/",
+      base: "./",
     };
   }
 });
