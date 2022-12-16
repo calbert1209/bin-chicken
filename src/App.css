@@ -60,10 +60,20 @@ textarea {
   position: relative;
 }
 
-#output-display > #copy-button {
-  position: absolute;
-  top: 0;
-  right: 0;
+#copy-button {
+  margin-top: 10px;
+  background-color: rgb(240, 240, 240);
+  border: 0;
+  border-radius: 2px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#copy-button > svg {
+  fill: rgb(50, 50, 50);
 }
 
 #output {

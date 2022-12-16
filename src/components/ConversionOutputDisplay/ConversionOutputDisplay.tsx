@@ -1,4 +1,6 @@
+/// <reference types="vite-plugin-svgr/client" />
 import { FC } from "react";
+import { ReactComponent as CopyIcon } from "../../assets/copy-icon.svg";
 
 export const ConversionOutputDisplay: FC<{
   value: string;
@@ -12,7 +14,7 @@ export const ConversionOutputDisplay: FC<{
         {value}
       </div>
       <button id="copy-button" onClick={handleOnClickCopy}>
-        copy
+        <CopyIcon />
       </button>
     </div>
   );
