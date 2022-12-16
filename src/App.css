@@ -56,6 +56,16 @@ textarea {
   margin-bottom: 8px;
 }
 
+#output-display {
+  position: relative;
+}
+
+#output-display > #copy-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
 #output {
   margin-top: 12px;
   padding: 8px;
