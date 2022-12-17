@@ -1,11 +1,11 @@
 import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
 import svgr from "vite-plugin-svgr";
+import preact from "@preact/preset-vite";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => {
   const baseConfig = {
-    plugins: [react(), svgr()],
+    plugins: [preact(), svgr()],
   };
   if (command === "serve") {
     return baseConfig;

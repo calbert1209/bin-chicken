@@ -1,5 +1,5 @@
 /// <reference types="vite-plugin-svgr/client" />
-import { FC } from "react";
+import { FunctionComponent as FC } from "preact";
 import { ReactComponent as CopyIcon } from "../../assets/copy-icon.svg";
 
 export const ConversionOutputDisplay: FC<{
