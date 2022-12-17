@@ -1,4 +1,5 @@
-import { FC, useRef } from "react";
+import { useRef } from "preact/hooks";
+import { FunctionComponent as FC } from "preact";
 import { TextInputField, TextAreaField } from "./ConversionFormParts";
 
 const IV_STRING = "63b0329eda143b6c0941689b2e6dd741";

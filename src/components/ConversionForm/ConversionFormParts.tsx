@@ -1,7 +1,12 @@
-import { ComponentPropsWithoutRef, forwardRef } from "react";
+import { forwardRef } from "preact/compat";
 
-interface InputProps extends ComponentPropsWithoutRef<"input"> {
+// interface InputProps extends ComponentPropsWithoutRef<"input"> {
+//   label: string;
+// }
+interface InputProps {
+  id: string;
   label: string;
+  defaultValue?: string;
 }
 
 export const TextInputField = forwardRef<HTMLInputElement, InputProps>(
@@ -21,8 +26,10 @@ export const TextInputField = forwardRef<HTMLInputElement, InputProps>(
   }
 );
 
-interface TextAreaProps extends ComponentPropsWithoutRef<"textarea"> {
+interface TextAreaProps {
+  id: string;
   label: string;
+  defaultValue?: string;
 }
 
 export const TextAreaField = forwardRef<HTMLTextAreaElement, TextAreaProps>(
