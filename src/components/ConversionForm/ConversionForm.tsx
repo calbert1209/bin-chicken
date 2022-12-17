@@ -8,6 +8,7 @@ interface ConversionFormProps {
   id: string;
   legend: string;
   actionLabel: string;
+  textAreaLabel: string;
   onSubmit?: (payload: Partial<ConversionPayload>) => void;
 }
 
@@ -28,6 +29,7 @@ export const ConversionForm: FC<ConversionFormProps> = ({
   id,
   legend,
   actionLabel,
+  textAreaLabel,
   onSubmit,
 }) => {
   const passwordRef = useRef<HTMLInputElement>(null);
@@ -57,7 +59,7 @@ export const ConversionForm: FC<ConversionFormProps> = ({
           id="iv"
           defaultValue={IV_STRING}
         />
-        <TextAreaField ref={textRef} id="plaintext" label="plain text" />
+        <TextAreaField ref={textRef} id="plaintext" label={textAreaLabel} />
         <div className="form-row">
           <button onClick={handleOnSubmit}>{actionLabel}</button>
         </div>

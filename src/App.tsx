@@ -45,11 +45,13 @@ function App() {
 
   return (
     <div className="App">
+      <h2>Bin Chicken</h2>
       <div className="columns">
         <ConversionForm
           id="encrypt"
           legend="encrypt"
           actionLabel="encrypt →"
+          textAreaLabel="plain text"
           onSubmit={handleOnSubmitEncrypt}
         />
         <ConversionOutputDisplay
@@ -60,6 +62,7 @@ function App() {
           id="decrypt"
           legend="decrypt"
           actionLabel="← decrypt"
+          textAreaLabel="cypher text"
           onSubmit={handleOnSubmitDecrypt}
         />
       </div>
