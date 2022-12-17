@@ -95,3 +95,22 @@ textarea {
   color: rgb(200, 0, 0);
   border: 1px solid rgb(220, 180, 180);
 }
+
+/* (100px <= width <= 1900px) */
+@media (max-width: 1000px) {
+  .columns {
+    flex-direction: column;
+  }
+
+  .form-body {
+    width: 95vw;
+  }
+
+  #output-display {
+    width: 95vw;
+  }
+
+  #output {
+    width: 93vw;
+  }
+}
