@@ -1,8 +1,8 @@
 import "./App.css";
-import ThreeColumnPage from "./page/ThreeColumnPage";
+import { TabbedPage } from "./page/TabbedPage";
 
 function App() {
-  return <ThreeColumnPage />;
+  return <TabbedPage />;
 }
 
 export default App;

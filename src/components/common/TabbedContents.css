@@ -1,0 +1,12 @@
+.tabbed-contents-header {
+  display: flex;
+}
+
+.tabbed-contents-header-tab {
+  cursor: pointer;
+  padding: 8px 16px;
+}
+
+.tabbed-contents-header-tab[data-selected="true"] {
+  border-bottom: 2px solid black;
+}
