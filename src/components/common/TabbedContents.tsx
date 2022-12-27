@@ -9,7 +9,7 @@ function toArray<T>(x: T | T[]) {
 interface TabHeaderProps {
   tabIndex: number;
   onChangeTab: (tabIndex: number) => void;
-  children: ComponentChildren | Array<ComponentChildren>;
+  children: ComponentChildren;
 }
 
 function TabsHeader({ children, tabIndex, onChangeTab }: TabHeaderProps) {
@@ -32,7 +32,7 @@ function TabsHeader({ children, tabIndex, onChangeTab }: TabHeaderProps) {
 
 interface TabsBodyProps {
   tabIndex: number;
-  children: ComponentChildren | Array<ComponentChildren>;
+  children: ComponentChildren;
 }
 
 function TabsBody({ tabIndex, children }: TabsBodyProps) {
@@ -46,8 +46,8 @@ function TabsBody({ tabIndex, children }: TabsBodyProps) {
 }
 
 interface TabbedContentProps {
-  tabs: ComponentChildren | Array<ComponentChildren>;
-  children: ComponentChildren | Array<ComponentChildren>;
+  tabs: ComponentChildren;
+  children: ComponentChildren;
 }
 
 export function TabbedContent({ tabs, children }: TabbedContentProps) {

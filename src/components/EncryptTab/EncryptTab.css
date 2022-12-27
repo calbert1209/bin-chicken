@@ -1,0 +1,9 @@
+.encrypt-tab-alert {
+  padding: 8px 16px;
+  color: darkred;
+  background-color: pink;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
