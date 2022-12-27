@@ -1,9 +1,10 @@
-.encrypt-tab-alert {
-  padding: 8px 16px;
-  color: darkred;
-  background-color: pink;
-  border-radius: 4px;
+.encrypt-tab {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 80vw;
+}
+
+.encrypt-secret-input {
+  width: 100%;
 }
