@@ -1,14 +1,67 @@
 import { useRef, useState } from "preact/hooks";
-import { JSXInternal } from "preact/src/jsx";
+import { encrypt2hex } from "../../service/AES-GCM";
 import { Alert, AlertLevel } from "../common/Alert";
 import { SecretInput } from "../common/SecretInput";
 import "./EncryptTab.css";
 
+const password = "helloWorld";
+const example = {
+  iv: "63b0329eda143b6c0941689b2e6dd741",
+  cypher:
+    "e54cd8a481b9eb36b803564ef145e49b90f730cb50d732d7aa440d3ae19b2281aaa38b42f027cc50",
+};
+
 export function EncryptTab() {
   const [error, setError] = useState<Error | null>(null);
+  const [msg, setMsg] = useState<string | null>(null);
   const secretRef = useRef<HTMLInputElement | null>(null);
-  const cypherIvRef = useRef<HTMLTextAreaElement | null>(null);
+  const plaintextRef = useRef<HTMLTextAreaElement | null>(null);
 
+  const handleOnClickEncrypt = () => {
+    setMsg(null);
+    setError(null);
+    // todo check inputs
+    encrypt2hex(
+      secretRef.current!.value,
+      example.iv,
+      plaintextRef.current!.value
+    )
+      .then((cypherText) => {
+        const cypherIv = {
+          iv: example.iv,
+          cypherText,
+        };
+        console.log("encrypted", cypherIv);
+
+        return navigator.clipboard.writeText(JSON.stringify(cypherIv, null, 2));
+      })
+      .then(() => {
+        setMsg("cypher text successfully generated");
+      })
+      .catch(setError);
+  };
+  return (
+    <div className="encrypt-tab">
+      {error && (
+        <Alert onClose={() => setError(null)} level={AlertLevel.Warning}>
+          {error.message}
+        </Alert>
+      )}
+      {!error && msg && <Alert onClose={() => setMsg(null)}>{msg}</Alert>}
+      <SecretInput
+        className="encrypt-secret-input"
+        ref={secretRef}
+        defaultValue={password}
+        autoComplete="current-password"
+      />
+      <div>plain text</div>
+      <textarea ref={plaintextRef} defaultValue="I am not a cryptographer" />
+      <button onClick={handleOnClickEncrypt}>encrypt</button>
+    </div>
+  );
+}
+
+/**
   const parseCypherIv = (value: string | undefined) => {
     if (!value) return null;
 
@@ -21,27 +74,4 @@ export function EncryptTab() {
       }
     }
   };
-
-  return (
-    <div className="encrypt-tab">
-      {error && (
-        <Alert onClose={() => setError(null)} level={AlertLevel.Warning}>
-          {error.message}
-        </Alert>
-      )}
-      <SecretInput className="encrypt-secret-input" ref={secretRef} />
-      <textarea ref={cypherIvRef} />
-      <button
-        onClick={() =>
-          console.log("encrypt state", {
-            secret: secretRef.current?.value,
-            cypherIv: parseCypherIv(cypherIvRef.current?.value),
-            error,
-          })
-        }
-      >
-        encrypt
-      </button>
-    </div>
-  );
-}
+ */

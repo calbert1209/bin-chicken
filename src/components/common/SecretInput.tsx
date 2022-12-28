@@ -14,6 +14,8 @@ export const SecretInput = forwardRef<
 
   return (
     <form className="secret-input">
+      {/* prevents Chrome warning */}
+      <input type="text" autoComplete="username" hidden />
       <input {...props} ref={ref} type={hidden ? "password" : "text"} />
       <IconButton onClick={() => setHidden((s) => !s)}>
         <Icon />
