@@ -61,7 +61,7 @@ export function DecryptTab() {
 
       await navigator.clipboard.writeText(plaintext);
 
-      setMsg("Successfully decrypted cypher text");
+      setMsg("Successfully decrypted and copied cypher text");
     } catch (error) {
       if (error instanceof Error) {
         setError(error);
