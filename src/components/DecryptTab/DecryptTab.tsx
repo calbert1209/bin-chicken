@@ -3,7 +3,6 @@ import { decryptFromHex } from "../../service/AES-GCM";
 import { Alert, AlertLevel } from "../common/Alert";
 import { SecretInput } from "../common/SecretInput";
 import "./DecryptTab.css";
-const defaultPassword = "helloWorld";
 
 interface CypherIv {
   cypher: string;
@@ -80,7 +79,6 @@ export function DecryptTab() {
       <SecretInput
         className="decrypt-secret-input"
         ref={secretRef}
-        defaultValue={defaultPassword}
         autoComplete="current-password"
       />
       <div className="decrypt-label">cypher + IV</div>

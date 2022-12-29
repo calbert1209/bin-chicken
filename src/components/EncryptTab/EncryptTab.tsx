@@ -4,14 +4,12 @@ import { Alert, AlertLevel } from "../common/Alert";
 import { SecretInput } from "../common/SecretInput";
 import "./EncryptTab.css";
 
-const password = "helloWorld";
-
 const getFormValues = (
   secretRef: MutableRef<HTMLInputElement | null>,
   plainTextRef: MutableRef<HTMLTextAreaElement | null>
 ) => {
   const password = secretRef.current?.value;
-  if (!password) {
+  if (!password || password.length < 6) {
     throw Error("invalid password");
   }
 
@@ -65,7 +63,6 @@ export function EncryptTab() {
       <SecretInput
         className="encrypt-secret-input"
         ref={secretRef}
-        defaultValue={password}
         autoComplete="current-password"
       />
       <div className="encrypt-label">plain text</div>
