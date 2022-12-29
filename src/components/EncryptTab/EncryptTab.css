@@ -5,6 +5,12 @@
   max-width: 80vw;
 }
 
+@media (max-width: 400px) {
+  .encrypt-tab {
+    max-width: 100vw;
+  }
+}
+
 .encrypt-secret-input {
   width: 100%;
 }

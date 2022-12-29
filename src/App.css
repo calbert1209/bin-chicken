@@ -96,7 +96,7 @@ textarea {
   border: 1px solid rgb(220, 180, 180);
 }
 
-/* (100px <= width <= 1900px) */
+/* (width <= 1000px) */
 @media (max-width: 1000px) {
   .columns {
     flex-direction: column;

@@ -5,6 +5,12 @@
   max-width: 80vw;
 }
 
+@media (max-width: 400px) {
+  .decrypt-tab {
+    max-width: 100vw;
+  }
+}
+
 .decrypt-secret-input {
   width: 100%;
 }
