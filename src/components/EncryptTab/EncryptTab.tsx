@@ -30,7 +30,7 @@ export function EncryptTab() {
         };
         console.log("encrypted", cypherIv);
 
-        return navigator.clipboard.writeText(JSON.stringify(cypherIv, null, 2));
+        return navigator.clipboard.writeText(`${iv}:${cypher}`);
       })
       .then(() => {
         setMsg("cypher text successfully generated");
