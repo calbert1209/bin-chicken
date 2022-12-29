@@ -1,0 +1,14 @@
+.common-alert {
+  padding: 8px 16px;
+  color: darkblue;
+  background-color: lightblue;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.common-alert[data-level="warning"] {
+  color: darkred;
+  background-color: pink;
+}

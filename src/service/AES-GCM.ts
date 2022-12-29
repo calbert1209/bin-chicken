@@ -84,13 +84,18 @@ export async function encrypt2hex(
   const key = await deriveKey(keyMaterial);
 
   const enc = new TextEncoder();
-  const cypherBuffer = await window.crypto.subtle.encrypt(
-    createAesGcmOptions(ivHex),
-    key,
-    enc.encode(plaintext)
-  );
 
-  return uint8Array2hexString(new Uint8Array(cypherBuffer));
+  try {
+    const cypherBuffer = await window.crypto.subtle.encrypt(
+      createAesGcmOptions(ivHex),
+      key,
+      enc.encode(plaintext)
+    );
+
+    return uint8Array2hexString(new Uint8Array(cypherBuffer));
+  } catch (error) {
+    throw new Error("encrypt failed", { cause: error });
+  }
 }
 
 export async function decryptFromHex(
@@ -102,11 +107,21 @@ export async function decryptFromHex(
   const key = await deriveKey(keyMaterial);
   const cypherText = hexString2Uint8Array(hexCypherText);
 
-  const decrypted = await window.crypto.subtle.decrypt(
-    createAesGcmOptions(ivHex),
-    key,
-    cypherText
-  );
+  try {
+    const decrypted = await window.crypto.subtle.decrypt(
+      createAesGcmOptions(ivHex),
+      key,
+      cypherText
+    );
 
-  return new TextDecoder().decode(decrypted);
+    return new TextDecoder().decode(decrypted);
+  } catch (error) {
+    throw new Error("decrypt failed", { cause: error });
+  }
+}
+
+export function generateIvHex() {
+  const u8array = new Uint8Array(16);
+  window.crypto.getRandomValues(u8array);
+  return uint8Array2hexString(u8array);
 }

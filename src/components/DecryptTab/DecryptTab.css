@@ -1,0 +1,36 @@
+.decrypt-tab {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 80vw;
+}
+
+@media (max-width: 400px) {
+  .decrypt-tab {
+    max-width: 100vw;
+  }
+}
+
+.decrypt-secret-input {
+  width: 100%;
+}
+
+textarea.decrypt-cypher-iv {
+  height: 3rem;
+}
+
+.decrypt-btn {
+  font-size: calc(16 / 16 * 1rem);
+  padding: 8px 16px;
+  color: white;
+  background-color: darkslateblue;
+  border: 0;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.decrypt-label {
+  color: darkslateblue;
+  font-size: calc(14 / 16 * 1rem);
+  font-weight: bold;
+}
