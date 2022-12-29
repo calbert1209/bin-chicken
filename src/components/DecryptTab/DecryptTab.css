@@ -1,0 +1,10 @@
+.decrypt-tab {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 80vw;
+}
+
+.decrypt-secret-input {
+  width: 100%;
+}

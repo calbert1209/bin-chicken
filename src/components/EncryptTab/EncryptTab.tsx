@@ -1,5 +1,5 @@
 import { useRef, useState } from "preact/hooks";
-import { encrypt2hex } from "../../service/AES-GCM";
+import { encrypt2hex, generateIvHex } from "../../service/AES-GCM";
 import { Alert, AlertLevel } from "../common/Alert";
 import { SecretInput } from "../common/SecretInput";
 import "./EncryptTab.css";
@@ -21,15 +21,12 @@ export function EncryptTab() {
     setMsg(null);
     setError(null);
     // todo check inputs
-    encrypt2hex(
-      secretRef.current!.value,
-      example.iv,
-      plaintextRef.current!.value
-    )
-      .then((cypherText) => {
+    const iv = generateIvHex();
+    encrypt2hex(secretRef.current!.value, iv, plaintextRef.current!.value)
+      .then((cypher) => {
         const cypherIv = {
-          iv: example.iv,
-          cypherText,
+          iv,
+          cypher,
         };
         console.log("encrypted", cypherIv);
 

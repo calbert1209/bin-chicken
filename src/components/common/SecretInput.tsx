@@ -13,13 +13,15 @@ export const SecretInput = forwardRef<
   const Icon = hidden ? HiddenIcon : VisibleIcon;
 
   return (
-    <form className="secret-input">
-      {/* prevents Chrome warning */}
-      <input type="text" autoComplete="username" hidden />
-      <input {...props} ref={ref} type={hidden ? "password" : "text"} />
+    <div className="secret-input">
+      <form className="secret-input-form">
+        {/* prevents Chrome */}
+        <input type="text" autoComplete="username" hidden />
+        <input {...props} ref={ref} type={hidden ? "password" : "text"} />
+      </form>
       <IconButton onClick={() => setHidden((s) => !s)}>
         <Icon />
       </IconButton>
-    </form>
+    </div>
   );
 });

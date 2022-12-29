@@ -2,6 +2,7 @@ import { LockIcon, UnlockIcon } from "../assets/icons";
 import { FilledIcon } from "../components/common/FilledIcon";
 import { LabeledIcon } from "../components/common/LabeledIcon";
 import { TabbedContent } from "../components/common/TabbedContents";
+import { DecryptTab } from "../components/DecryptTab/DecryptTab";
 import { EncryptTab } from "../components/EncryptTab/EncryptTab";
 
 export function TabbedPage() {
@@ -17,7 +18,7 @@ export function TabbedPage() {
       ]}
     >
       <EncryptTab />
-      <div>tab two's contents</div>
+      <DecryptTab />
     </TabbedContent>
   );
 }
