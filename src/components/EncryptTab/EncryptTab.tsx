@@ -61,15 +61,22 @@ export function EncryptTab() {
         </Alert>
       )}
       {!error && msg && <Alert onClose={() => setMsg(null)}>{msg}</Alert>}
+      <div className="encrypt-label">password</div>
       <SecretInput
         className="encrypt-secret-input"
         ref={secretRef}
         defaultValue={password}
         autoComplete="current-password"
       />
-      <div>plain text</div>
-      <textarea ref={plainTextRef} defaultValue="I am not a cryptographer" />
-      <button onClick={handleOnClickEncrypt}>encrypt</button>
+      <div className="encrypt-label">plain text</div>
+      <textarea
+        className="encrypt-plaintext"
+        ref={plainTextRef}
+        defaultValue="I am not a cryptographer"
+      />
+      <button className="encrypt-btn" onClick={handleOnClickEncrypt}>
+        encrypt
+      </button>
     </div>
   );
 }

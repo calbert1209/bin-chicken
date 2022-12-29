@@ -76,15 +76,18 @@ export function DecryptTab() {
         </Alert>
       )}
       {!error && msg && <Alert onClose={() => setMsg(null)}>{msg}</Alert>}
+      <div className="decrypt-label">password</div>
       <SecretInput
         className="decrypt-secret-input"
         ref={secretRef}
         defaultValue={defaultPassword}
         autoComplete="current-password"
       />
-      <div>cypher + I.V.</div>
-      <textarea ref={cypherIvRef} />
-      <button onClick={handleOnClickDecrypt}>decrypt</button>
+      <div className="decrypt-label">cypher + IV</div>
+      <textarea ref={cypherIvRef} className="decrypt-cypher-iv" />
+      <button className="decrypt-btn" onClick={handleOnClickDecrypt}>
+        decrypt
+      </button>
     </div>
   );
 }

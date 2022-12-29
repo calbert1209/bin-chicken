@@ -8,3 +8,23 @@
 .decrypt-secret-input {
   width: 100%;
 }
+
+textarea.decrypt-cypher-iv {
+  height: 3rem;
+}
+
+.decrypt-btn {
+  font-size: calc(16 / 16 * 1rem);
+  padding: 8px 16px;
+  color: white;
+  background-color: darkslateblue;
+  border: 0;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.decrypt-label {
+  color: darkslateblue;
+  font-size: calc(14 / 16 * 1rem);
+  font-weight: bold;
+}

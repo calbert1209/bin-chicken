@@ -8,3 +8,23 @@
 .encrypt-secret-input {
   width: 100%;
 }
+
+textarea.encrypt-plaintext {
+  height: 3rem;
+}
+
+.encrypt-btn {
+  font-size: calc(16 / 16 * 1rem);
+  padding: 8px 16px;
+  color: white;
+  background-color: darkcyan;
+  border: 0;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.encrypt-label {
+  color: darkcyan;
+  font-size: calc(14 / 16 * 1rem);
+  font-weight: bold;
+}
