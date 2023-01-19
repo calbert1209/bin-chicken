@@ -3,14 +3,14 @@ import { FilledIcon } from "./FilledIcon";
 import "./LabeledIcon.css";
 
 interface LabeledIconProps {
-  label: string;
+  label?: string;
   children: ComponentChild;
 }
 
 export function LabeledIcon({ label, children }: LabeledIconProps) {
   return (
     <div className="labeled-icon">
-      <div>{label}</div>
+      {label && <div>{label}</div>}
       <FilledIcon>{children}</FilledIcon>
     </div>
   );
