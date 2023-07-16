@@ -10,6 +10,6 @@
   align-items: center;
 }
 
-.popover-layer[date-blur="true"] {
+.popover-layer[data-blur="true"] {
   backdrop-filter: blur(4px);
 }

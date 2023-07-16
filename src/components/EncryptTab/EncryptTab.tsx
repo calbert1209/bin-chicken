@@ -2,6 +2,7 @@ import { MutableRef, useRef, useState } from "preact/hooks";
 import { encrypt2hex, generateIvHex } from "../../service/AES-GCM";
 import { Alert, AlertLevel } from "../common/Alert";
 import { SecretInput } from "../common/SecretInput";
+import { QRScannerDialog } from "../QRScannerDialog/QRScannerDialog";
 import "./EncryptTab.css";
 
 const getFormValues = (
@@ -29,6 +30,8 @@ export function EncryptTab() {
   const [msg, setMsg] = useState<string | null>(null);
   const secretRef = useRef<HTMLInputElement | null>(null);
   const plainTextRef = useRef<HTMLTextAreaElement | null>(null);
+
+  const [open, setOpen] = useState(false);
 
   const handleOnClickEncrypt = async () => {
     setMsg(null);
@@ -74,6 +77,11 @@ export function EncryptTab() {
       <button className="encrypt-btn" onClick={handleOnClickEncrypt}>
         encrypt
       </button>
+      <button onClick={() => setOpen(true)}>open</button>
+      <QRScannerDialog
+        isOpen={open}
+        onClose={() => setOpen(false)}
+      ></QRScannerDialog>
     </div>
   );
 }
