@@ -1,0 +1,7 @@
+
+code.codeSample {
+  font-family: "Monoid Tight", monospace;
+  font-size: calc(12 / 16 * 1rem);
+  background-color: #f8f8f8;
+  padding: 4px 8px;
+}
