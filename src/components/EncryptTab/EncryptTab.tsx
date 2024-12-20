@@ -3,6 +3,8 @@ import { encrypt2hex, generateIvHex } from "../../service/AES-GCM";
 import { Alert, AlertLevel } from "../common/Alert";
 import { SecretInput } from "../common/SecretInput";
 import "./EncryptTab.css";
+import { generateQRCodeDataUrl } from "../../service/qr-code"; 
+import { HashSample } from "../common/CodeSample";
 
 const getFormValues = (
   secretRef: MutableRef<HTMLInputElement | null>,
@@ -27,6 +29,8 @@ const getFormValues = (
 export function EncryptTab() {
   const [error, setError] = useState<Error | null>(null);
   const [msg, setMsg] = useState<string | null>(null);
+  const [dataUrl, setDataUrl] = useState<string | null>(null);
+  const [cipherSample, setCipherSample] = useState<string | null>(null);
   const secretRef = useRef<HTMLInputElement | null>(null);
   const plainTextRef = useRef<HTMLTextAreaElement | null>(null);
 
@@ -37,14 +41,19 @@ export function EncryptTab() {
     try {
       const { password, plainText } = getFormValues(secretRef, plainTextRef);
       const iv = generateIvHex();
-      const cypher = await encrypt2hex(password, iv, plainText);
-      const cypherIv = `${iv}:${cypher}`;
+      const cipher = await encrypt2hex(password, iv, plainText);
+      const cipherIv = `${iv}:${cipher}`;
       if (import.meta.env.DEV) {
-        console.log("encrypted", cypherIv);
+        console.log("encrypted", cipherIv);
       }
 
-      await navigator.clipboard.writeText(cypherIv);
-      setMsg("Successfully generated and copied cypher text");
+      await navigator.clipboard.writeText(cipherIv);
+      
+      const cipherIvHead = cipherIv.slice(0, 8);
+      setMsg(`Successfully generated and copied cypher text. ${cipherIvHead}...`);
+      
+      setDataUrl(generateQRCodeDataUrl(cipherIv, 4));
+      setCipherSample(cipherIvHead);
     } catch (error) {
       if (error instanceof Error) {
         setError(error);
@@ -74,6 +83,12 @@ export function EncryptTab() {
       <button className="encrypt-btn" onClick={handleOnClickEncrypt}>
         encrypt
       </button>
+      {cipherSample ? (
+        <HashSample content={cipherSample} />
+      ) : null}
+      {dataUrl ? (
+        <img src={dataUrl} alt="QR code" className="encrypt-qr-code" />
+      ) : null}
     </div>
   );
 }
