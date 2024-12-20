@@ -3,6 +3,7 @@ import { decryptFromHex } from "../../service/AES-GCM";
 import { Alert, AlertLevel } from "../common/Alert";
 import { SecretInput } from "../common/SecretInput";
 import "./DecryptTab.css";
+import { QRScanner } from "./QRScanner";
 
 interface CypherIv {
   cypher: string;
@@ -67,6 +68,11 @@ export function DecryptTab() {
       }
     }
   };
+
+  const handleScannerResult= (result:string) => {
+    cypherIvRef.current!.value = result;
+  }
+
   return (
     <div className="decrypt-tab">
       {error && (
@@ -86,6 +92,7 @@ export function DecryptTab() {
       <button className="decrypt-btn" onClick={handleOnClickDecrypt}>
         decrypt
       </button>
+      <QRScanner onResult={handleScannerResult}/>
     </div>
   );
 }
