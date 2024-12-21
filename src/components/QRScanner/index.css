@@ -1,11 +1,13 @@
 :root{
-  --slateblue-20: color-mix(in srgb, slateblue 20%, white 80%);
-  --slateblue-30: color-mix(in srgb, slateblue 30%, white 70%);
-  --slateblue-40: color-mix(in srgb, slateblue 40%, white 60%);
-  --slateblue-60: color-mix(in srgb, slateblue 60%, white 40%);
-  --slateblue-80: color-mix(in srgb, slateblue 80%, white 20%);
-
-
+  --darkslateblue-10: color-mix(in srgb, darkslateblue 10%, white 90%);
+  --darkslateblue-20: color-mix(in srgb, darkslateblue 20%, white 80%);
+  --darkslateblue-30: color-mix(in srgb, darkslateblue 30%, white 70%);
+  --darkslateblue-40: color-mix(in srgb, darkslateblue 40%, white 60%);
+  --darkslateblue-50: color-mix(in srgb, darkslateblue 50%, white 50%);
+  --darkslateblue-60: color-mix(in srgb, darkslateblue 60%, white 40%);
+  --darkslateblue-70: color-mix(in srgb, darkslateblue 70%, white 30%);
+  --darkslateblue-80: color-mix(in srgb, darkslateblue 80%, white 20%);
+  --darkslateblue-90: color-mix(in srgb, darkslateblue 90%, white 10%);
 }
 
 button.qrScanner__startCamera, div.qrScanner__loading {
@@ -13,30 +15,37 @@ button.qrScanner__startCamera, div.qrScanner__loading {
   aspect-ratio: 1/1;
   display: flex;
   justify-content: center;
-  background-color: var(--slateblue-20);
-  border: 1px solid var(--slateblue-60);
-  border-radius: 4px;;
+  align-items: center;
+  background-color: var(--darkslateblue-20);
+  border: 1px solid var(--darkslateblue-60);
+  border-radius: 4px;
+  color: darkslateblue;
+}
+
+button.qrScanner__startCamera svg {
+  fill: currentColor;
+  width: 128px;
 }
 
 button.qrScanner__startCamera:hover {
-  background-color: var(--slateblue-30);
+  background-color: var(--darkslateblue-30);
 }
 
 button.qrScanner__startCamera:active {
-  background-color: var(--slateblue-20);
+  background-color: var(--darkslateblue-20);
 }
 
 video.qrScanner__video {
   width: 100%;
   aspect-ratio: 1/1;
-  border: 1px solid var(--slateblue-80);
+  border: 1px solid var(--darkslateblue-80);
   border-radius: 4px;
   filter: grayscale(1);
 }
 
 button.qrScanner__stopCamera {
-  color: slateblue;
-  background-color: var(--slateblue-20);
-  border: 1px solid slateblue;
+  color: darkslateblue;
+  background-color: var(--darkslateblue-20);
+  border: 1px solid darkslateblue;
   border-radius: 4px;
 }

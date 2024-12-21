@@ -2,6 +2,7 @@ import { useMemo, useRef, useState } from "preact/hooks";
 import { CameraMediaStream, Detector } from "./qrScanner";
 import { Show } from "../common/Show";
 import "./index.css";
+import { AddQRCodeIcon } from "../../assets/icons";
 
 type ScannerStatus = "initial" | "starting" | "started";
 
@@ -51,7 +52,7 @@ export const QRScanner = ({ onResult }: QRScannerProps) => {
           className="qrScanner__startCamera"
           onClick={handleStart}
         >
-          start camera
+        <AddQRCodeIcon />
         </button>
       </Show>
       <Show when={status === "starting"}>
