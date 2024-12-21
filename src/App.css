@@ -1,3 +1,54 @@
+:root{
+  --darkslateblue-10: color-mix(in srgb, darkslateblue 10%, white 90%);
+  --darkslateblue-20: color-mix(in srgb, darkslateblue 20%, white 80%);
+  --darkslateblue-30: color-mix(in srgb, darkslateblue 30%, white 70%);
+  --darkslateblue-40: color-mix(in srgb, darkslateblue 40%, white 60%);
+  --darkslateblue-50: color-mix(in srgb, darkslateblue 50%, white 50%);
+  --darkslateblue-60: color-mix(in srgb, darkslateblue 60%, white 40%);
+  --darkslateblue-70: color-mix(in srgb, darkslateblue 70%, white 30%);
+  --darkslateblue-80: color-mix(in srgb, darkslateblue 80%, white 20%);
+  --darkslateblue-90: color-mix(in srgb, darkslateblue 90%, white 10%);
+  --darkblue-10: color-mix(in srgb, darkblue 10%, white 90%);
+  --darkblue-20: color-mix(in srgb, darkblue 20%, white 80%);
+  --darkblue-30: color-mix(in srgb, darkblue 30%, white 70%);
+  --darkblue-40: color-mix(in srgb, darkblue 40%, white 60%);
+  --darkblue-50: color-mix(in srgb, darkblue 50%, white 50%);
+  --darkblue-60: color-mix(in srgb, darkblue 60%, white 40%);
+  --darkblue-70: color-mix(in srgb, darkblue 70%, white 30%);
+  --darkblue-80: color-mix(in srgb, darkblue 80%, white 20%);
+  --darkblue-90: color-mix(in srgb, darkblue 90%, white 10%);
+  --darkred-10: color-mix(in srgb, darkred 10%, white 90%);
+  --darkred-20: color-mix(in srgb, darkred 20%, white 80%);
+  --darkred-30: color-mix(in srgb, darkred 30%, white 70%);
+  --darkred-40: color-mix(in srgb, darkred 40%, white 60%);
+  --darkred-50: color-mix(in srgb, darkred 50%, white 50%);
+  --darkred-60: color-mix(in srgb, darkred 60%, white 40%);
+  --darkred-70: color-mix(in srgb, darkred 70%, white 30%);
+  --darkred-80: color-mix(in srgb, darkred 80%, white 20%);
+  --darkred-90: color-mix(in srgb, darkred 90%, white 10%);
+  --red-10: color-mix(in srgb, red 10%, white 90%);
+  --red-20: color-mix(in srgb, red 20%, white 80%);
+  --red-30: color-mix(in srgb, red 30%, white 70%);
+  --red-40: color-mix(in srgb, red 40%, white 60%);
+  --red-50: color-mix(in srgb, red 50%, white 50%);
+  --red-60: color-mix(in srgb, red 60%, white 40%);
+  --red-70: color-mix(in srgb, red 70%, white 30%);
+  --red-80: color-mix(in srgb, red 80%, white 20%);
+  --red-90: color-mix(in srgb, red 90%, white 10%);
+  --seagreen-10: color-mix(in srgb, seagreen 10%, white 90%);
+  --seagreen-20: color-mix(in srgb, seagreen 20%, white 80%);
+  --seagreen-30: color-mix(in srgb, seagreen 30%, white 70%);
+  --seagreen-40: color-mix(in srgb, seagreen 40%, white 60%);
+  --seagreen-50: color-mix(in srgb, seagreen 50%, white 50%);
+  --seagreen-60: color-mix(in srgb, seagreen 60%, white 40%);
+  --seagreen-70: color-mix(in srgb, seagreen 70%, white 30%);
+  --seagreen-80: color-mix(in srgb, seagreen 80%, white 20%);
+  --seagreen-90: color-mix(in srgb, seagreen 90%, white 10%);
+  --gray-240: rgb(240, 240, 240);
+  --gray-200: rgb(200, 200, 200);
+  --gray-50: rgb(50, 50, 50);
+}
+
 body {
   margin: 24px;
 }
@@ -31,16 +82,16 @@ body {
 }
 
 fieldset {
-  border: 1px solid rgb(200, 200, 200);
+  border: 1px solid var(--gray-200);
   border-radius: 4px;
 }
 
 input,
 textarea {
-  border: 1px solid rgb(200, 200, 200);
+  border: 1px solid var(--gray-200);
   border-radius: 4px;
   padding: 4px 8px;
-  color: rgb(50, 50, 50);
+  color: var(--gray50);
   font-size: calc(12 / 16 * 1rem);
   font-family: "Monoid Tight", monospace;
 }
@@ -66,7 +117,7 @@ textarea {
 
 #copy-button {
   margin-top: 10px;
-  background-color: rgb(240, 240, 240);
+  background-color: var(--gray-240);
   border: 0;
   border-radius: 2px;
   width: 36px;
@@ -77,16 +128,16 @@ textarea {
 }
 
 #copy-button > svg {
-  fill: rgb(50, 50, 50);
+  fill: var(--gray-50);
 }
 
 #output {
   margin-top: 12px;
   padding: 8px;
-  border: 1px solid rgb(200, 200, 200);
+  border: 1px solid var(--gray-200);
   border-radius: 4px;
-  background-color: rgb(240, 240, 240);
-  color: rgb(50, 50, 50);
+  background-color: var(--gray-240);
+  color: var(--gray-50);
   font-family: "Monoid Tight", monospace;
   font-size: calc(12 / 16 * 1rem);
   width: 30vw;
