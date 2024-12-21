@@ -3,8 +3,9 @@ import { encrypt2hex, generateIvHex } from "../../service/AES-GCM";
 import { Alert, AlertLevel } from "../common/Alert";
 import { SecretInput } from "../common/SecretInput";
 import "./EncryptTab.css";
-import { generateQRCodeDataUrl } from "../../service/qr-code"; 
+import { generateQRCodeDataUrl } from "../../service/qr-code";
 import { HashSample } from "../common/CodeSample";
+import { Show } from "../common/Show";
 
 const getFormValues = (
   secretRef: MutableRef<HTMLInputElement | null>,
@@ -48,10 +49,12 @@ export function EncryptTab() {
       }
 
       await navigator.clipboard.writeText(cipherIv);
-      
+
       const cipherIvHead = cipherIv.slice(0, 8);
-      setMsg(`Successfully generated and copied cipher text. ${cipherIvHead}...`);
-      
+      setMsg(
+        `Successfully generated and copied cipher text. ${cipherIvHead}...`
+      );
+
       setDataUrl(generateQRCodeDataUrl(cipherIv, 4));
       setCipherSample(cipherIvHead);
     } catch (error) {
@@ -83,12 +86,20 @@ export function EncryptTab() {
       <button className="encrypt-btn" onClick={handleOnClickEncrypt}>
         encrypt
       </button>
-      {cipherSample ? (
-        <HashSample content={cipherSample} />
-      ) : null}
-      {dataUrl ? (
-        <img src={dataUrl} alt="QR code" className="encrypt-qr-code" />
-      ) : null}
+      <Show when={dataUrl !== null}>
+        <div className="encrypt-result-column">
+          <img
+            className="cipherIv-QrCode"
+            src={dataUrl as string}
+            alt="QR code"
+          />
+        </div>
+      </Show>
+      <Show when={cipherSample !== null}>
+        <div className="encrypt-result-column">
+          <HashSample content={cipherSample as string} />
+        </div>
+      </Show>
     </div>
   );
 }

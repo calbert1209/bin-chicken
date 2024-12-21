@@ -34,3 +34,15 @@ textarea.encrypt-plaintext {
   font-size: calc(14 / 16 * 1rem);
   font-weight: bold;
 }
+
+div.encrypt-result-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+img.cipherIv-QrCode {
+  width: 240px;
+  aspect-ratio: 1 / 1;
+}

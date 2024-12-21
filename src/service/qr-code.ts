@@ -13,3 +13,10 @@ export function generateQRCodeDataUrl(content: string, size: number = 4) {
   qr.make();
   return qr.createDataURL(size);
 }
+
+export function drawQRCode(context: CanvasRenderingContext2D, content: string) {
+  const qr = qrcode(TYPE, CORRECTION_LEVEL);
+  qr.addData(content);
+  qr.make();
+  qr.renderTo2dContext(context, 4);
+}
