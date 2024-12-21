@@ -3,7 +3,7 @@ import { decryptFromHex } from "../../service/AES-GCM";
 import { Alert, AlertLevel } from "../common/Alert";
 import { SecretInput } from "../common/SecretInput";
 import "./DecryptTab.css";
-import { QRScanner } from "./QRScanner";
+import { QRScanner } from "../QRScanner";
 
 interface CypherIv {
   cypher: string;

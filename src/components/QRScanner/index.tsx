@@ -1,14 +1,15 @@
 import { useMemo, useRef, useState } from "preact/hooks";
 import { CameraMediaStream, Detector } from "./qrScanner";
 import { Show } from "../common/Show";
+import "./index.css";
 
 type ScannerStatus = "initial" | "starting" | "started";
 
 type QRScannerProps = {
   onResult: (result: string) => void;
-}
+};
 
-export const QRScanner = ({onResult}: QRScannerProps) => {
+export const QRScanner = ({ onResult }: QRScannerProps) => {
   const [status, setStatus] = useState<ScannerStatus>("initial");
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const detector = useMemo(() => new Detector(), []);
@@ -17,7 +18,7 @@ export const QRScanner = ({onResult}: QRScannerProps) => {
   const handleResult = (result: string) => {
     onResult(result);
     handleStop();
-  }
+  };
 
   const handleStart = async () => {
     setStatus("starting");
@@ -28,8 +29,8 @@ export const QRScanner = ({onResult}: QRScannerProps) => {
       detector.startScanning(videoRef.current!, handleResult);
     } catch (error: unknown) {
       console.error(error);
-        setStatus("initial");
-        handleStop();
+      setStatus("initial");
+      handleStop();
     }
   };
 
@@ -47,32 +48,27 @@ export const QRScanner = ({onResult}: QRScannerProps) => {
     <>
       <Show when={status === "initial"}>
         <button
-          style={{
-            width: "100%",
-            aspectRatio: "1/1",
-            display: "flex",
-            justifyContent: "center",
-          }}
+          className="qrScanner__startCamera"
           onClick={handleStart}
         >
           start camera
         </button>
       </Show>
       <Show when={status === "starting"}>
-        <p>starting camera...</p>
+        <div className="qrScanner__loading">
+          <p>starting camera...</p>
+        </div>
       </Show>
       <video
         ref={videoRef}
+        class="qrScanner__video"
         style={{
-          width: "100%",
-          aspectRatio: "1/1",
           display: status === "started" ? "block" : "none",
-          filter: "grayscale(1)",
         }}
         autoPlay
       ></video>
       <Show when={status === "started"}>
-        <button onClick={handleStop}>stop</button>
+        <button className="qrScanner__stopCamera" onClick={handleStop}>stop</button>
       </Show>
     </>
   );

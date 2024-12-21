@@ -1,3 +1,7 @@
+body {
+  margin: 24px;
+}
+
 #encrypt legend,
 #encrypt label {
   font-weight: bold;
