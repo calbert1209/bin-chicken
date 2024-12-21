@@ -1,15 +1,3 @@
-:root{
-  --darkslateblue-10: color-mix(in srgb, darkslateblue 10%, white 90%);
-  --darkslateblue-20: color-mix(in srgb, darkslateblue 20%, white 80%);
-  --darkslateblue-30: color-mix(in srgb, darkslateblue 30%, white 70%);
-  --darkslateblue-40: color-mix(in srgb, darkslateblue 40%, white 60%);
-  --darkslateblue-50: color-mix(in srgb, darkslateblue 50%, white 50%);
-  --darkslateblue-60: color-mix(in srgb, darkslateblue 60%, white 40%);
-  --darkslateblue-70: color-mix(in srgb, darkslateblue 70%, white 30%);
-  --darkslateblue-80: color-mix(in srgb, darkslateblue 80%, white 20%);
-  --darkslateblue-90: color-mix(in srgb, darkslateblue 90%, white 10%);
-}
-
 button.qrScanner__startCamera, div.qrScanner__loading {
   width: 100%;
   aspect-ratio: 1/1;

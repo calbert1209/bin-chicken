@@ -1,7 +1,7 @@
 .common-alert {
   padding: 8px 16px;
   color: darkblue;
-  background-color: lightblue;
+  background-color: var(--darkblue-10);
   border-radius: 4px;
   display: flex;
   justify-content: space-between;
@@ -10,5 +10,5 @@
 
 .common-alert[data-level="warning"] {
   color: darkred;
-  background-color: pink;
+  background-color: var(--red-10);
 }
