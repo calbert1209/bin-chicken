@@ -17,8 +17,8 @@ function ThreeColumnPage() {
     if (isConversionPayload(payload)) {
       const { password, iv, text } = payload;
       encrypt2hex(password, iv, text)
-        .then((cypherText) => {
-          setConvertedValue(cypherText);
+        .then((cipherText) => {
+          setConvertedValue(cipherText);
           setError(null);
         })
         .catch((error) => {
@@ -60,7 +60,7 @@ function ThreeColumnPage() {
           id="decrypt"
           legend="decrypt"
           actionLabel="← decrypt"
-          textAreaLabel="cypher text"
+          textAreaLabel="cipher text"
           onSubmit={handleOnSubmitDecrypt}
         />
       </div>

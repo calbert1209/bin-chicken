@@ -86,13 +86,13 @@ export async function encrypt2hex(
   const enc = new TextEncoder();
 
   try {
-    const cypherBuffer = await window.crypto.subtle.encrypt(
+    const cipherBuffer = await window.crypto.subtle.encrypt(
       createAesGcmOptions(ivHex),
       key,
       enc.encode(plaintext)
     );
 
-    return uint8Array2hexString(new Uint8Array(cypherBuffer));
+    return uint8Array2hexString(new Uint8Array(cipherBuffer));
   } catch (error) {
     throw new Error("encrypt failed", { cause: error });
   }
@@ -101,17 +101,17 @@ export async function encrypt2hex(
 export async function decryptFromHex(
   password: string,
   ivHex: string,
-  hexCypherText: string
+  hexCipherText: string
 ) {
   const keyMaterial = await getKeyMaterial(password);
   const key = await deriveKey(keyMaterial);
-  const cypherText = hexString2Uint8Array(hexCypherText);
+  const cipherText = hexString2Uint8Array(hexCipherText);
 
   try {
     const decrypted = await window.crypto.subtle.decrypt(
       createAesGcmOptions(ivHex),
       key,
-      cypherText
+      cipherText
     );
 
     return new TextDecoder().decode(decrypted);

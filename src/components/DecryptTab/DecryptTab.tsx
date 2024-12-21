@@ -5,38 +5,38 @@ import { SecretInput } from "../common/SecretInput";
 import "./DecryptTab.css";
 import { QRScanner } from "../QRScanner";
 
-interface CypherIv {
-  cypher: string;
+type CipherIv = {
+  cipher: string;
   iv: string;
 }
 
-const parseCypherIv = (text: string): CypherIv => {
-  const [iv, cypher] = text.split(":");
-  if (!iv || !cypher) throw Error("could not parse cypher or IV");
+const parseCipherIv = (text: string): CipherIv => {
+  const [iv, cipher] = text.split(":");
+  if (!iv || !cipher) throw Error("could not parse cipher or IV");
 
   return {
-    cypher,
+    cipher,
     iv,
   };
 };
 
 const getFormValues = (
   secretRef: MutableRef<HTMLInputElement | null>,
-  cypherIvRef: MutableRef<HTMLTextAreaElement | null>
-) => {
+  cipherIvRef: MutableRef<HTMLTextAreaElement | null>
+) => { 
   const password = secretRef.current?.value;
   if (!password) {
     throw Error("invalid password");
   }
 
-  const cypherIvText = cypherIvRef.current?.value;
-  if (!cypherIvText) {
-    throw Error("invalid cypherIv");
+  const CipherIvText = cipherIvRef.current?.value;
+  if (!CipherIvText) {
+    throw Error("invalid CipherIv");
   }
-  const { cypher, iv } = parseCypherIv(cypherIvText);
+  const { cipher, iv } = parseCipherIv(CipherIvText);
   return {
     password,
-    cypher,
+    cipher,
     iv,
   };
 };
@@ -45,23 +45,23 @@ export function DecryptTab() {
   const [error, setError] = useState<Error | null>(null);
   const [msg, setMsg] = useState<string | null>(null);
   const secretRef = useRef<HTMLInputElement | null>(null);
-  const cypherIvRef = useRef<HTMLTextAreaElement | null>(null);
+  const CipherIvRef = useRef<HTMLTextAreaElement | null>(null);
 
   const handleOnClickDecrypt = async () => {
     setError(null);
     setMsg(null);
 
     try {
-      const { password, iv, cypher } = getFormValues(secretRef, cypherIvRef);
+      const { password, iv, cipher } = getFormValues(secretRef, CipherIvRef);
 
-      const plaintext = await decryptFromHex(password, iv, cypher);
+      const plaintext = await decryptFromHex(password, iv, cipher);
       if (import.meta.env.DEV) {
         console.log("decrypted: %s", plaintext);
       }
 
       await navigator.clipboard.writeText(plaintext);
 
-      setMsg("Successfully decrypted and copied cypher text");
+      setMsg("Successfully decrypted and copied cipher text");
     } catch (error) {
       if (error instanceof Error) {
         setError(error);
@@ -70,7 +70,7 @@ export function DecryptTab() {
   };
 
   const handleScannerResult= (result:string) => {
-    cypherIvRef.current!.value = result;
+    CipherIvRef.current!.value = result;
   }
 
   return (
@@ -87,8 +87,8 @@ export function DecryptTab() {
         ref={secretRef}
         autoComplete="current-password"
       />
-      <div className="decrypt-label">cypher + IV</div>
-      <textarea ref={cypherIvRef} className="decrypt-cypher-iv" />
+      <div className="decrypt-label">cipher + IV</div>
+      <textarea ref={CipherIvRef} className="decrypt-cipher-iv" />
       <button className="decrypt-btn" onClick={handleOnClickDecrypt}>
         decrypt
       </button>

@@ -50,7 +50,7 @@ export function EncryptTab() {
       await navigator.clipboard.writeText(cipherIv);
       
       const cipherIvHead = cipherIv.slice(0, 8);
-      setMsg(`Successfully generated and copied cypher text. ${cipherIvHead}...`);
+      setMsg(`Successfully generated and copied cipher text. ${cipherIvHead}...`);
       
       setDataUrl(generateQRCodeDataUrl(cipherIv, 4));
       setCipherSample(cipherIvHead);
