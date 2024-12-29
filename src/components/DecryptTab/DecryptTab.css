@@ -34,3 +34,18 @@ textarea.decrypt-cipher-iv {
   font-size: calc(14 / 16 * 1rem);
   font-weight: bold;
 }
+
+code.cipherTextHead,
+.plainTextPreview {
+  background-color: #eee;
+  color: darkslateblue;
+  font-family: "Monoid Tight", monospace;
+  padding: 4px;
+  font-size: 12px;
+}
+
+.plainTextPreview {
+  border-radius: 4px;
+  margin-top: 8px;
+  white-space: pre-wrap;
+}

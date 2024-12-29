@@ -4,11 +4,12 @@ import { Alert, AlertLevel } from "../common/Alert";
 import { SecretInput } from "../common/SecretInput";
 import "./DecryptTab.css";
 import { QRScanner } from "../QRScanner";
+import { Show } from "../common/Show";
 
 type CipherIv = {
   cipher: string;
   iv: string;
-}
+};
 
 const parseCipherIv = (text: string): CipherIv => {
   const [iv, cipher] = text.split(":");
@@ -23,7 +24,7 @@ const parseCipherIv = (text: string): CipherIv => {
 const getFormValues = (
   secretRef: MutableRef<HTMLInputElement | null>,
   cipherIvRef: MutableRef<HTMLTextAreaElement | null>
-) => { 
+) => {
   const password = secretRef.current?.value;
   if (!password) {
     throw Error("invalid password");
@@ -44,6 +45,9 @@ const getFormValues = (
 export function DecryptTab() {
   const [error, setError] = useState<Error | null>(null);
   const [msg, setMsg] = useState<string | null>(null);
+  const [plainText, setPlainText] = useState<string | null>(null);
+  const [cipherTextHead, setCipherTextHead] = useState<string | null>(null);
+
   const secretRef = useRef<HTMLInputElement | null>(null);
   const CipherIvRef = useRef<HTMLTextAreaElement | null>(null);
 
@@ -61,6 +65,9 @@ export function DecryptTab() {
 
       await navigator.clipboard.writeText(plaintext);
 
+      setPlainText(plaintext);
+      setCipherTextHead(iv.slice(0, 8));
+
       setMsg("Successfully decrypted and copied cipher text");
     } catch (error) {
       if (error instanceof Error) {
@@ -69,9 +76,11 @@ export function DecryptTab() {
     }
   };
 
-  const handleScannerResult= (result:string) => {
+  const handleScannerResult = (result: string) => {
     CipherIvRef.current!.value = result;
-  }
+  };
+
+  console.log(error);
 
   return (
     <div className="decrypt-tab">
@@ -93,6 +102,14 @@ export function DecryptTab() {
         decrypt
       </button>
       <QRScanner onResult={handleScannerResult}/>
+      <Show when={plainText !== null}>
+        <details>
+          <summary>
+            <code class="cipherTextHead">{cipherTextHead}</code>
+          </summary>
+          <div class="plainTextPreview">{plainText}</div>
+        </details>
+      </Show>
     </div>
   );
 }
