@@ -84,11 +84,11 @@ export function DecryptTab() {
 
   return (
     <div className="decrypt-tab">
-      {error && (
+      {error ? (
         <Alert onClose={() => setError(null)} level={AlertLevel.Warning}>
           {`${error.name}: ${error.message}`}
         </Alert>
-      )}
+      ) : null}
       {!error && msg && <Alert onClose={() => setMsg(null)}>{msg}</Alert>}
       <div className="decrypt-label">password</div>
       <SecretInput
@@ -101,7 +101,10 @@ export function DecryptTab() {
       <button className="decrypt-btn" onClick={handleOnClickDecrypt}>
         decrypt
       </button>
-      <QRScanner onResult={handleScannerResult}/>
+      <QRScanner
+        onResult={handleScannerResult}
+        onError={(error) => (error instanceof Error ? setError(error) : null)}
+      />
       <Show when={plainText !== null}>
         <details>
           <summary>

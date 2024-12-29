@@ -8,9 +8,10 @@ type ScannerStatus = "initial" | "starting" | "started";
 
 type QRScannerProps = {
   onResult: (result: string) => void;
+  onError: (error: unknown) => void;
 };
 
-export const QRScanner = ({ onResult }: QRScannerProps) => {
+export const QRScanner = ({ onResult, onError }: QRScannerProps) => {
   const [status, setStatus] = useState<ScannerStatus>("initial");
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const detector = useMemo(() => new Detector(), []);
@@ -32,6 +33,7 @@ export const QRScanner = ({ onResult }: QRScannerProps) => {
       console.error(error);
       setStatus("initial");
       handleStop();
+      onError(error);
     }
   };
 
@@ -48,11 +50,8 @@ export const QRScanner = ({ onResult }: QRScannerProps) => {
   return (
     <>
       <Show when={status === "initial"}>
-        <button
-          className="qrScanner__startCamera"
-          onClick={handleStart}
-        >
-        <AddQRCodeIcon />
+        <button className="qrScanner__startCamera" onClick={handleStart}>
+          <AddQRCodeIcon />
         </button>
       </Show>
       <Show when={status === "starting"}>
@@ -69,7 +68,9 @@ export const QRScanner = ({ onResult }: QRScannerProps) => {
         autoPlay
       ></video>
       <Show when={status === "started"}>
-        <button className="qrScanner__stopCamera" onClick={handleStop}>stop</button>
+        <button className="qrScanner__stopCamera" onClick={handleStop}>
+          stop
+        </button>
       </Show>
     </>
   );
