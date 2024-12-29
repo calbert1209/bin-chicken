@@ -17,6 +17,7 @@
 
 textarea.encrypt-plaintext {
   height: 3rem;
+  resize: vertical;
 }
 
 .encrypt-btn {

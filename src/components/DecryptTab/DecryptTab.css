@@ -17,6 +17,7 @@
 
 textarea.decrypt-cipher-iv {
   height: 3rem;
+  resize: vertical;
 }
 
 .decrypt-btn {
