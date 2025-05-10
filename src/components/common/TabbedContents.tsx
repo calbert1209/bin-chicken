@@ -1,6 +1,7 @@
 import { ComponentChildren } from "preact";
 import { useEffect, useState } from "preact/hooks";
 import "./TabbedContents.css";
+import { useTabbedContentsControl } from "./useTabbedContentsControl";
 
 function toArray<T>(x: T | T[]) {
   return Array.isArray(x) ? x : [x];
@@ -51,45 +52,16 @@ interface TabbedContentProps {
 }
 
 export function TabbedContent({ tabs, children }: TabbedContentProps) {
-  const [tabIndex, setTabIndex] = useState(getTabIndexFromQuery);
-
-  // Add tab query param to URL if it doesn't exist
-  useEffect(() => {
-    if (!queryHasTabIndex()) {
-      setTabIndexInQuery(tabIndex);
-    }
-  }, [location.search]);
-
-  const updateTabIndex = (index: number) => {
-    setTabIndex(index);
-    setTabIndexInQuery(index);
-  };
+  const [tabIndex, setTabIndex] = useTabbedContentsControl();
 
   return (
     <>
       <TabsHeader
         tabIndex={tabIndex}
-        onChangeTab={updateTabIndex}
+        onChangeTab={setTabIndex}
         children={tabs}
       />
       <TabsBody tabIndex={tabIndex} children={children} />
     </>
   );
 }
-
-const getTabIndexFromQuery = () => {
-  const urlParams = new URLSearchParams(window.location.search);
-  const tabIndex = urlParams.get("tab");
-  return tabIndex ? parseInt(tabIndex) : 0;
-};
-
-const queryHasTabIndex = () => {
-  const urlParams = new URLSearchParams(window.location.search);
-  return urlParams.has("tab");
-};
-
-const setTabIndexInQuery = (tabIndex: number) => {
-  const urlParams = new URLSearchParams(window.location.search);
-  urlParams.set("tab", tabIndex.toString());
-  window.history.replaceState({}, "", "?" + urlParams.toString());
-};
